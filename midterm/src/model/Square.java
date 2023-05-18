@@ -20,8 +20,15 @@ public class Square {
         return row;
     }
 
-    public boolean isAtLastRow(int color) {
-        return true;
+    public boolean isAtLastRow(int color) {  // checks if the pieces at the last row
+        if (color == 1 && getRow() == 8) {
+            return true;
+        } else if (color == 0 && getRow() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public boolean isEmpty() {
@@ -32,8 +39,13 @@ public class Square {
         }
     }
 
-    public boolean isAtSameColumn(Square s) {
-        return true;
+    public boolean isAtSameColumn(Square s) {  // checks if the square is in the same column with the other one
+        int column = s.getColumn();
+        if(column== getColumn()){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
