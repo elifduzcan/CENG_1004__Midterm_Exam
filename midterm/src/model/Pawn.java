@@ -1,22 +1,69 @@
 package model;
 
 public class Pawn extends Piece {
-    public Pawn(int color) {
-        super(color);
+
+
+    public Pawn(int color, Square location) {
+        super(color, location);
     }
 
     @Override
     public boolean canMove(String destination) {
-return true;
+        boolean validMove = false;
+        Square targetLocation = location.getBoard().getSquareAt(destination);
+        int rowDistance = targetLocation.getRowDistance(location);
+        if (this.location.isAtSameColumn(targetLocation)) {
+            if (getColor() == ChessBoard.WHITE && rowDistance > 0 && rowDistance <= 2) {
+                if (rowDistance == 2) {
+                    if (initialLocation) { //pawn is moving twice, check two squares in front are empty
+                        Square[] between = location.getBoard().getSquaresBetween(location, targetLocation);
+                        validMove = targetLocation.isEmpty() && between[0].isEmpty();
+                    }
+                } else {
+                    validMove = targetLocation.isEmpty();
+                }
+                return validMove;
+            } else if (getColor() == ChessBoard.BLACK && rowDistance < 0 && rowDistance >= -2) {
+                if (rowDistance == -2) {
+                    if (initialLocation) { //pawn is moving twice, check two squares in front are empty
+                        Square[] between = location.getBoard().getSquaresBetween(location, targetLocation);
+                        validMove = targetLocation.isEmpty() && between[0].isEmpty();
+                    }
+                } else {
+                    validMove = targetLocation.isEmpty();
+                }
+            }
+            // attacking diagonals
+        } else if (this.location.isNeighborColumn(targetLocation)) {
+            if (getColor() == ChessBoard.WHITE && rowDistance == 1) {
+                validMove = !targetLocation.isEmpty() && targetLocation.getPiece().getColor() == ChessBoard.BLACK;
+            } else if (getColor() == ChessBoard.BLACK && rowDistance == -1) {
+                validMove = !targetLocation.isEmpty() && targetLocation.getPiece().getColor() == ChessBoard.WHITE;
+            }
+        }
+        return validMove;
+    }
+
+
+    @Override
+    public void move(String destination) {
+        Square targetLocation = location.getBoard().getSquareAt(destination);
+        //promoteToQueen
+        if (targetLocation.isAtLastRow(getColor())) {
+            targetLocation.putNewQueen(getColor());
+        } else {
+            targetLocation.setPiece(this);
+        }
+        //clear previous location
+        location.clear();
+        //update current location
+        location = targetLocation;
+        location.getBoard().nextPlayer();
     }
 
     @Override
     public String toString() {
-        if (getColor() == 1) {
-            return "P";
-        } else {
-            return "p";
-        }
+        return getColor() == ChessBoard.WHITE ? "P" : "p";
     }
 }
 

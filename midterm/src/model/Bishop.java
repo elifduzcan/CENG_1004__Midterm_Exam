@@ -7,10 +7,6 @@ public class Bishop extends Piece{
 
     @Override
     public String toString() {
-        if (getColor() == 1) {
-            return "B";
-        } else {
-            return "b";
-        }
+        return getColor() == ChessBoard.WHITE ? "B" : "b";
     }
 }

@@ -1,7 +1,10 @@
 package model;
 
 public class ChessBoard {
+    public static final int WHITE = 1;
+    public static final int BLACK = 0;
     private int currentColor;
+    private Color color;
     private int player; // white 1, black 0
     private Square[] squares;
 
@@ -15,14 +18,6 @@ public class ChessBoard {
             }
         }
     }
-
-/*    public boolean isWhitePlaying() {
-        if (player == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 
     public boolean isGameEnded() {
         return isAllOpponentPiecesCaptured();
@@ -91,6 +86,27 @@ public class ChessBoard {
         }
         return updatedPiece;
     }
+
+
+    public boolean isWhitePlaying() {
+        if (currentColor == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public Piece convertInputToCoordinates(String input) {
+        int column = Integer.valueOf(input.substring(0, 1));
+        int row = Integer.valueOf(input.substring(1, 2));
+        return getPieceFromGivenSquare(row, column);
+    }
+
+    public enum Color {
+        WHITE,
+        BLACK
+    }
+
+
 
 
 }
