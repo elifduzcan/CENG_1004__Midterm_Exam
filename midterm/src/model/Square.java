@@ -28,7 +28,6 @@ public class Square {
         } else {
             return false;
         }
-
     }
 
     public boolean isEmpty() {

@@ -15,9 +15,11 @@ public class Main {
         printBoard(board);
 
         //4. while döngüsü ile oyunu oynat
+        while (!board.isGameEnded()){
+
+        }
 
     }
-
 
 
     private static void printBoard(ChessBoard board) {     // prints the initial version of the chessboard

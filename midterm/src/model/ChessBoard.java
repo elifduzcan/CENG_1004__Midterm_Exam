@@ -1,6 +1,7 @@
 package model;
 
 public class ChessBoard {
+    private int currentColor;
     private int player; // white 1, black 0
     private Square[] squares;
 
@@ -15,17 +16,29 @@ public class ChessBoard {
         }
     }
 
-//    public boolean isWhitePlaying() {
-//        if (player == 1) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+/*    public boolean isWhitePlaying() {
+        if (player == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/
 
     public boolean isGameEnded() {
+        return isAllOpponentPiecesCaptured();
+    }
+
+    private boolean isAllOpponentPiecesCaptured() {
+        int opponentColor = (currentColor == 1) ? 0 : 1;
+        for (Square square : squares) {
+            Piece piece = getPieceFromGivenSquare(square.column, square.row);
+            if (piece != null && piece.getColor() == opponentColor) {
+                return false;
+            }
+        }
         return true;
     }
+
 
     public void initialize() {  //sets the positions of the pieces on the board
         //region placing whites aka 1
@@ -56,9 +69,7 @@ public class ChessBoard {
         updateSpecificSquare(8, 6, new Bishop(0));
         updateSpecificSquare(8, 7, new Knight(0));
         updateSpecificSquare(8, 8, new Rook(0));
-
         //endregion
-
     }
 
     public Piece getPieceFromGivenSquare(int x, int y) {
