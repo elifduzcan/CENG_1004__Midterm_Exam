@@ -7,6 +7,10 @@ public class Rook extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == ChessBoard.WHITE ? "R" : "r";
+        if (getColor() == 1) {
+            return "R";
+        } else {
+            return "r";
+        }
     }
 }

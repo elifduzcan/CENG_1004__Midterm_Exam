@@ -7,6 +7,10 @@ public class Queen extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == ChessBoard.WHITE ? "Q" : "q";
+        if (getColor() == 1) {
+            return "Q";
+        } else {
+            return "q";
+        }
     }
 }

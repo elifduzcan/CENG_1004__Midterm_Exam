@@ -7,6 +7,10 @@ public class King extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == ChessBoard.WHITE ? "K" : "k";
+        if (getColor() == 1) {
+            return "K";
+        } else {
+            return "k";
+        }
     }
 }

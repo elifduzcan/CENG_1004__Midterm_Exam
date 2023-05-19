@@ -7,6 +7,10 @@ public class Knight extends Piece {
 
     @Override
     public String toString() {
-        return getColor() == ChessBoard.WHITE ? "N" : "n";
+        if (getColor() == 1) {
+            return "N";
+        } else {
+            return "n";
+        }
     }
 }
