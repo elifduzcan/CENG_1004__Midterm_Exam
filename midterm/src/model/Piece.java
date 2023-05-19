@@ -1,25 +1,40 @@
 package model;
 
-public class Piece {
+public abstract class Piece {
     private int color;
 
-    public Piece(int color) {
+    private int column;
+    private int row;
+
+
+    public Piece(int color,int column, int row) {
         this.color = color;
+        this.column = column;
+        this.row = row;
     }
 
     public int getColor() {
         return color;
     }
 
-    public boolean canMove(String destination){
-        return true;
+    public int getColumn() {
+        return column;
     }
 
-    public void move(String destination){
+    public int getRow() {
+        return row;
     }
+
+    public abstract boolean canMove(Square targetSquare);
+
+    public abstract void move(String destination);
+
 
     @Override
     public String toString() {
         return "";
     }
+
+
 }
+
