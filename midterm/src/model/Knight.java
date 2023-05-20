@@ -11,7 +11,7 @@ public class Knight extends Piece {
         int rowDistance = targetSquare.getRow() - this.getRow();
         Piece pieceInTargetSquare = targetSquare.piece;
 
-        if (Math.abs(columnDistance) == 1 && Math.abs(rowDistance) == 2) {
+        if ((Math.abs(columnDistance) == 1 && Math.abs(rowDistance) == 2) || (Math.abs(columnDistance) == 2 && Math.abs(rowDistance) == 1)) {
             if (pieceInTargetSquare == null) {
                 return true;
             } else return pieceInTargetSquare.getColor() != getColor();
@@ -21,11 +21,6 @@ public class Knight extends Piece {
 
     }
 
-    @Override
-    public void move(String destination) {
-        // TODO: 19.05.2023 fonksiyonu yaz
-
-    }
 
     @Override
     public String toString() {

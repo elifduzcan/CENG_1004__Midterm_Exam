@@ -2,7 +2,7 @@ package model;
 
 public class ChessBoard {
     // TODO: 19.05.2023 aşağıdaki değişken whitePlaying ismiyle olmalı
-    private Boolean whitePlaying;
+    private Boolean whitePlaying = true;
     private Square[] squares;
 
     public ChessBoard() {
@@ -20,16 +20,16 @@ public class ChessBoard {
     public void initialize() {  //sets the positions of the pieces on the board
         // region initialize white pieces
         changePieceInSquare(1, 1, new Rook(1, 1, 1));
-        changePieceInSquare(1, 2, new Knight(1, 1, 2));
-        changePieceInSquare(1, 3, new Bishop(1, 1, 3));
-        changePieceInSquare(1, 4, new Queen(1, 1, 4));
-        changePieceInSquare(1, 5, new King(1, 1, 5));
-        changePieceInSquare(1, 6, new Bishop(1, 1, 6));
-        changePieceInSquare(1, 7, new Knight(1, 1, 7));
-        changePieceInSquare(1, 8, new Rook(1, 1, 8));
+        changePieceInSquare(2, 1, new Knight(1, 2, 1));
+        changePieceInSquare(3, 1, new Bishop(1, 3, 1));
+        changePieceInSquare(4, 1, new Queen(1, 4, 1));
+        changePieceInSquare(5, 1, new King(1, 5, 1));
+        changePieceInSquare(6, 1, new Bishop(1, 6, 1));
+        changePieceInSquare(7, 1, new Knight(1, 7, 1));
+        changePieceInSquare(8, 1, new Rook(1, 8, 1));
         for (int column = 1; column <= 8; column++) {
             int row = 2;
-            changePieceInSquare(row, column, new Pawn(1, 2, column));
+            changePieceInSquare(column, row, new Pawn(1, column, 2));
         }
 
         // endregion
@@ -38,15 +38,15 @@ public class ChessBoard {
 
         for (int column = 1; column <= 8; column++) {
             int row = 7;
-            changePieceInSquare(row, column, new Pawn(0, 7, column));
+            changePieceInSquare(column, row, new Pawn(0, column, 7));
         }
-        changePieceInSquare(8, 1, new Rook(0, 8, 1));
-        changePieceInSquare(8, 2, new Knight(0, 8, 2));
-        changePieceInSquare(8, 3, new Bishop(0, 8, 3));
-        changePieceInSquare(8, 4, new Queen(0, 8, 4));
-        changePieceInSquare(8, 5, new King(0, 8, 5));
-        changePieceInSquare(8, 6, new Bishop(0, 8, 6));
-        changePieceInSquare(8, 7, new Knight(0, 8, 7));
+        changePieceInSquare(1, 8, new Rook(0, 1, 8));
+        changePieceInSquare(2, 8, new Knight(0, 2, 8));
+        changePieceInSquare(3, 8, new Bishop(0, 3, 8));
+        changePieceInSquare(4, 8, new Queen(0, 4, 8));
+        changePieceInSquare(5, 8, new King(0, 5, 8));
+        changePieceInSquare(6, 8, new Bishop(0, 6, 8));
+        changePieceInSquare(7, 8, new Knight(0, 7, 8));
         changePieceInSquare(8, 8, new Rook(0, 8, 8));
         // endregion
     }
@@ -54,12 +54,13 @@ public class ChessBoard {
     public boolean isGameEnded() {  // checks whether oppponent's pieces all gone
         int opponentColor = (whitePlaying ? 0 : 1);
 
-        for (int i = 0; i < squares.length; i++) {
-            Piece piece = getPieceFromGivenSquare(squares[i].getColumn(), squares[i].getRow());
+        for (Square square : squares) {
+            Piece piece = getPieceFromGivenSquare(square.getColumn(), square.getRow());
             if (piece != null && piece.getColor() == opponentColor) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -99,14 +100,6 @@ public class ChessBoard {
         }
     }
 
-    public boolean isWhitePlaying() {
-        if (whitePlaying) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public Square castStringToSquare(String location) {
         int locationCol = convertCharToInteger(location.charAt(0));
         int locationRow = Integer.parseInt(location.substring(1, 2));
@@ -120,7 +113,7 @@ public class ChessBoard {
 
     public static Integer convertCharToInteger(Character c) {
         // TODO: 19.05.2023  charlar lowercase yapılacak
-        int col = 0;
+        int col;
         if (c == 'a') {
             col = 1;
         } else if (c == 'b') {
@@ -142,5 +135,17 @@ public class ChessBoard {
         }
         return col;
     }
+
+    public boolean isWhitePlaying() {
+        return whitePlaying;
+    }
+
+    public boolean setWhitePlaying() {
+        if (whitePlaying) {
+            return whitePlaying = false;
+        } else return whitePlaying = true;
+    }
+
+
 }
 

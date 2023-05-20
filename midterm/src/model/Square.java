@@ -26,7 +26,6 @@ public class Square {
             return color == 0 && getRow() == 1;
         }
     }
-
     public boolean isEmpty() {  // checks if the square is empty
         return piece == null;
     }
@@ -34,6 +33,8 @@ public class Square {
     public boolean isAtSameColumn(Square s) {  // checks if the square is in the same column with the other square
         return s.getColumn() == column;
     }
+
+
 
 
 }

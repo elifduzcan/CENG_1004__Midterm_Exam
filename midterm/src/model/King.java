@@ -10,19 +10,13 @@ public class King extends Piece {
         int columnDistance = targetSquare.getColumn() - this.getColumn();
         int rowDistance = targetSquare.getRow() - this.getRow();
         Piece pieceInTargetSquare = targetSquare.piece;
-        if (Math.abs(columnDistance) == 1 || Math.abs(rowDistance) == 1 || (Math.abs(columnDistance) == 1 && Math.abs(rowDistance) == 1)) {
+        if ((Math.abs(columnDistance) == 1 && targetSquare.getRow() == getRow()) || (Math.abs(rowDistance) == 1 && targetSquare.getColumn() == this.getColumn()) || (Math.abs(columnDistance) == 1 && Math.abs(rowDistance) == 1)) {
             if (pieceInTargetSquare == null) {
                 return true;
             } else return pieceInTargetSquare.getColor() != getColor();
         } else {
             return false;
         }
-
-    }
-
-    @Override
-    public void move(String destination) {
-        // TODO: 19.05.2023 fonksiyonu yaz
 
     }
 
