@@ -7,13 +7,15 @@ public class Queen extends Piece {
 
     @Override
     public boolean canMove(Square targetSquare) { //taşların üzerinden atlayamama işinin kontrol edilmesi gerek
+        // TODO: 21.05.2023 Uçan taşları tekrar kontrol et
         int targetColumn = targetSquare.getColumn();
         int targetRow = targetSquare.getRow();
         int columnDistance = targetSquare.getColumn() - this.getColumn();
         int rowDistance = targetSquare.getRow() - this.getRow();
         Piece pieceInTargetSquare = targetSquare.piece;
+        System.out.println("thiscol " + this.getColumn() + "thicrow" + this.getRow() + "col dis " + columnDistance + " row distance " + rowDistance);
+        if ((columnDistance != 0 && rowDistance == 0) || (rowDistance != 0 && columnDistance == 0) || (Math.abs(columnDistance) == Math.abs(rowDistance))) {
 
-        if (Math.abs(columnDistance) > 0 || Math.abs(rowDistance) > 0 || (Math.abs(columnDistance) == Math.abs(rowDistance))) {
             int startRow = Math.min(this.getRow(), targetRow);
             int endRow = Math.max(this.getRow(), targetRow) - 1;
 
@@ -23,9 +25,18 @@ public class Queen extends Piece {
                     return false; // Yol üzerinde bir taş var
                 }
             }
-            if (pieceInTargetSquare == null) {
+            if (targetSquare.isEmpty()) {
+                setRow(targetSquare.getRow());
+                setColumn(targetSquare.getColumn());
                 return true;
-            } else return pieceInTargetSquare.getColor() != getColor();
+            } else {
+                if(pieceInTargetSquare.getColor()!= getColor()){
+                    setRow(targetSquare.getRow());
+                    setColumn(targetSquare.getColumn());
+                }
+                return pieceInTargetSquare.getColor() != getColor();
+            }
+
         } else {
             return false;
         }

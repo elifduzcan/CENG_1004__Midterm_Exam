@@ -8,6 +8,7 @@ public class Bishop extends Piece {
 
     @Override
     public boolean canMove(Square targetSquare) { // taşların üzerinden atlayamama işinin kontrol edilmesi gerek
+        // TODO: 21.05.2023 Uçan taşları tekrar kontrol et (4 farklı durum olacak galiba)
         int targetColumn = targetSquare.getColumn();
         int targetRow = targetSquare.getRow();
         int columnDistance = targetSquare.getColumn() - this.getColumn();
@@ -24,13 +25,12 @@ public class Bishop extends Piece {
                     return false; // Yol üzerinde bir taş var
                 }
             }
-            if (pieceInTargetSquare == null) {
+            if (targetSquare.isEmpty()) {
                 return true;
             } else return pieceInTargetSquare.getColor() != getColor();
         } else {
             return false;
         }
-
     }
 
     private Square getSquareAt(int column, int row) {

@@ -10,8 +10,8 @@ public class King extends Piece {
         int columnDistance = targetSquare.getColumn() - this.getColumn();
         int rowDistance = targetSquare.getRow() - this.getRow();
         Piece pieceInTargetSquare = targetSquare.piece;
-        if ((Math.abs(columnDistance) == 1 && targetSquare.getRow() == getRow()) || (Math.abs(rowDistance) == 1 && targetSquare.getColumn() == this.getColumn()) || (Math.abs(columnDistance) == 1 && Math.abs(rowDistance) == 1)) {
-            if (pieceInTargetSquare == null) {
+        if ((Math.abs(columnDistance) == 1 && rowDistance == 0) || (Math.abs(rowDistance) == 1 && columnDistance == 0) || (Math.abs(columnDistance) == 1 && Math.abs(rowDistance) == 1)) {
+            if (targetSquare.isEmpty()) {
                 return true;
             } else return pieceInTargetSquare.getColor() != getColor();
         } else {

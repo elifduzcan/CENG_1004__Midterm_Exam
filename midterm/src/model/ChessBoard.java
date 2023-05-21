@@ -5,6 +5,7 @@ public class ChessBoard {
     private Boolean whitePlaying = true;
     private Square[] squares;
 
+
     public ChessBoard() {
         //creating and filling square list
         squares = new Square[64];

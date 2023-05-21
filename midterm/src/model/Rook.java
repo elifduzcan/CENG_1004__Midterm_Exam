@@ -41,7 +41,7 @@ public class Rook extends Piece {
 
         // Hedef kare boş ise veya rakip bir taş varsa hareket geçerli
         Piece pieceInTargetSquare = targetSquare.piece;
-        return pieceInTargetSquare == null || pieceInTargetSquare.getColor() != getColor();
+        return targetSquare.isEmpty() || pieceInTargetSquare.getColor() != getColor();
     }
 
     private Square getSquareAt(int column, int row) {

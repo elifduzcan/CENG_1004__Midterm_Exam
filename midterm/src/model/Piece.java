@@ -19,9 +19,19 @@ public abstract class Piece {
         return column;
     }
 
+
     public int getRow() {
         return row;
     }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
 
     public abstract boolean canMove(Square targetSquare);
 
@@ -29,5 +39,7 @@ public abstract class Piece {
     public String toString() {
         return "";
     }
+
+
 }
 

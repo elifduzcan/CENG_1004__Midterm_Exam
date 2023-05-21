@@ -21,7 +21,7 @@ public class Main {
             System.out.println("It is " + (board.isWhitePlaying() ? "White" : "Black") + "'s turn");
 
             //2 kullanıcıdan oynatmak istediği taşı iste, yanlışsa bir daha zor
-            Piece piece = null;
+            Piece piece;
             int fromRow;
             int fromColumn;
             do {
@@ -29,11 +29,12 @@ public class Main {
                 String from = reader.next();
                 fromColumn = ChessBoard.convertCharToInteger(from.charAt(0));
                 fromRow = Integer.parseInt(from.substring(1, 2));
+                System.out.println("fromColumn " + fromColumn+ " fromRow "+ fromRow);
                 piece = board.getPieceFromGivenSquare(fromColumn, fromRow);
             } while (piece == null || piece.getColor() != (board.isWhitePlaying() ? 1 : 0));
 
             //3 kullanıcıdan taşı süreceği yeri iste. yanlışsa gene sor
-            String to = null;
+            String to;
             do {
                 System.out.print("Enter the new location of the piece:");
                 to = reader.next();
@@ -41,10 +42,10 @@ public class Main {
 
             int toColumn = ChessBoard.convertCharToInteger(to.charAt(0));
             int toRow = Integer.parseInt(to.substring(1, 2));
-            board.changePieceInSquare(toColumn, toRow, board.getPieceFromGivenSquare(fromColumn, fromRow));
-            board.changePieceInSquare(fromColumn, fromRow, null);
+            System.out.println("toColumn " + toColumn + " toRow " + toRow);
+            board.changePieceInSquare(toColumn, toRow, piece); // taşı hareket ettiriyor
+            board.changePieceInSquare(fromColumn, fromRow, null); // eski konumu siliyor
             board.setWhitePlaying();
-            //piece.move(to);
             board.printBoard();
         }
         reader.close();
